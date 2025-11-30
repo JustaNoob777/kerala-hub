@@ -1,0 +1,811 @@
+/* =========================================================
+   UNIVERSAL STYLES — Aesthetic Cream Theme (Optimized)
+========================================================= */
+
+/* ---------- CSS VARIABLES ---------- */
+:root{
+  --max-width: 1200px;
+  --page-pad: 22px;
+
+  --bg: #f3eee7;
+  --card-bg: #ffffff;
+  --muted: #6b655e;
+  --text: #32302b;
+  --soft-border: #e7e2db;
+
+  --accent: #7aa39c;
+  --accent-dark: #648c86;
+
+  --radius-lg: 14px;
+  --radius-md: 10px;
+
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+  --shadow-md: 0 6px 22px rgba(0,0,0,0.10);
+}
+
+/* ---------- RESET ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- PAGE WRAPPER ---------- */
+.page-wrapper{
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 28px auto;
+  padding-inline: var(--page-pad);
+  flex: 1;
+}
+
+/* =========================================================
+   HEADER + SEARCH
+========================================================= */
+
+.site-header {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-bottom: 1px solid rgba(150,150,150,0.25);
+}
+
+.header-inner{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 14px var(--page-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Logo + Title */
+.header-left{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Header RIGHT container */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-circle{
+  cursor: default;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#d9cbb8,#cfc2ad);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3a382f;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.site-title{
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #443f37;
+  cursor: default;
+}
+
+/* Search wrapper */
+.header-search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-wrapper{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+}
+
+#service-search{
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid #d9d4cd;
+  background: #faf7f3;
+  font-size: 0.98rem;
+  transition: 0.18s ease;
+}
+
+#service-search:hover{
+  transform: scale(1.01);
+}
+
+#service-search:focus{
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px #7aa39c33;
+}
+
+#search-btn{
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+#search-btn:hover{
+  background: var(--accent-dark);
+  transform: scale(1.01);
+}
+
+/* Suggestions dropdown */
+#suggestions{
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--soft-border);
+  border-radius: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: var(--shadow-sm);
+  display: none;
+  z-index: 1500;
+}
+
+#suggestions li{
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#suggestions li:active {
+  background: #e6e1d7;
+}
+
+#suggestions li:hover{
+  background: #f2efe8;
+}
+
+/* =========================================================
+   BREADCRUMB — FIXED
+========================================================= */
+
+.breadcrumb{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.breadcrumb a{
+  color: #4b4a45;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .20s ease, transform .20s ease;
+}
+
+.breadcrumb a:hover{
+  transform: scale(1.02);
+  color: var(--accent-dark);
+}
+
+.breadcrumb-separator{
+  color: #9e9a92;
+}
+
+/* =========================================================
+   BANNER / INFO BOXES
+========================================================= */
+
+.top-banner{
+  background: linear-gradient(135deg,#e8dfcf,#efe7d8);
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+
+.top-banner h1{
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.top-banner p{
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+/* Info box */
+.info-box{
+  cursor: default;
+  background: var(--card-bg);
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid rgba(122,163,156,0.13);
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card-grid{
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card{
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  transition: 0.18s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover{
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon{
+  width: 56px;
+  height: 56px;
+  background: #ece7df;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: #2c2a26;
+  margin-bottom: 4px;
+  letter-spacing: -0.25px;
+  cursor: default;
+}
+
+/* ---- Card description: hybrid clamp + fade (keeps 2 lines but fades gracefully) ---- */
+.card-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.38;
+  letter-spacing: -0.15px;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;    /* still shows 2 lines max */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* fade-out gradient */
+.card-desc::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 1.4em;           /* about one line */
+  width: 50%;
+  pointer-events: none;    /* doesn't block clicks */
+  background: linear-gradient(to right, rgba(255,255,255,0), var(--card-bg));
+}
+
+/* ======= PROFESSIONAL PILL STYLES (theme-matching) ======= */
+
+.pill-container {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* base pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;                 /* fully rounded */
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #18483f;                       /* darker accent text */
+  background: linear-gradient(180deg, #f0f6f4, #e8f1ee); /* soft surface */
+  border: 1px solid rgba(122,163,156,0.14);
+  box-shadow: 0 4px 10px rgba(20,72,63,0.04);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* small icon inside pill (optional SVG or emoji) */
+.pill .pill-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* subtle variants (keeps palette consistent but gives meaning) */
+.pill--online {
+  background: linear-gradient(180deg,#e6fbf6,#dff6f1);
+  border-color: rgba(102,187,171,0.20);
+  color: #0f6b5e;
+}
+.pill--offline {
+  background: linear-gradient(180deg,#fff6ea,#fff1df);
+  border-color: rgba(219,176,102,0.14);
+  color: #6a4c13;
+}
+.pill--offline/online {
+  background: linear-gradient(180deg,#eef6f2,#eef6ef);
+  border-color: rgba(122,163,156,0.12);
+  color: #145b50;
+}
+.pill--time {
+  background: linear-gradient(180deg,#f3f7fb,#eef4fb);
+  border-color: rgba(110,140,170,0.08);
+  color: #2e4b5a;
+}
+.pill--validity {
+  background: linear-gradient(180deg,#f9f6ff,#f5f0ff);
+  border-color: rgba(120,92,160,0.06);
+  color: #42376f;
+}
+
+/* compact variant for narrow screens */
+.pill--small {
+  padding: 6px 9px;
+  font-size: 0.85rem;
+  gap: 6px;
+}
+
+/* hover focus (non-intrusive) */
+.pill:hover, .pill:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(20,72,63,0.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor: default;
+}
+
+/* accessibility: keyboard focus */
+.pill:focus {
+  outline: 3px solid rgba(122,163,156,0.14);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   PHOTO GRID & MODAL
+========================================================= */
+
+.photo-grid{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.service-photo-thumb{
+  width:150px;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+#photo-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:1600;
+}
+
+#photo-modal img{
+  max-width: min(92vw, 900px);
+  max-height: 86vh;
+  object-fit: contain;
+  background: white;
+  border-radius: 12px;
+}
+
+
+/* Theme toggle button */
+.theme-btn {
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.25);
+    padding: 7px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    transition: 0.2s ease;
+}
+
+.theme-btn:hover {
+    background: rgba(0,0,0,0.08);
+}
+
+/* Dark-mode theme button border fix */
+html.dark-mode .theme-btn {
+    border-color: rgba(255,255,255,0.25);
+    color: #eaeaea;
+}
+html.dark-mode .theme-btn:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+/* MOBILE — move button below search bar */
+@media (max-width: 600px){
+  .header-right {
+      flex-direction: column;
+      align-items: flex-end;
+      width: 100%;
+      gap: 6px;
+  }
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  background:#efe8dc;
+  padding:18px;
+  text-align:center;
+  font-size:0.95rem;
+  color:#5a564d;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+/* ========================
+   RESPONSIVE BREAKPOINTS
+=================== */
+/* Large monitor */
+@media (min-width: 1600px){
+  .page-wrapper{
+    max-width: 1400px;
+  }
+  .card-grid{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px){
+  .card-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Normal phones (350px–600px) */
+@media (max-width: 600px){
+
+  /* --- Compact header --- */
+  .site-header {
+    padding: 6px 0;
+  }
+
+  .header-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 12px;
+    padding-bottom: 6px;
+  }
+
+  .logo-circle{
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .site-title{
+    font-size: 0.95rem;
+  }
+
+  /* --- Search bar --- */
+  .search-wrapper{
+    max-width: none;
+    width: 100%;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  #service-search{
+    width: calc(100% - 90px);
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  #search-btn{
+    width: 80px;
+    padding: 8px 12px;
+  }
+
+  /* --- Grid layout: 2 cards per row (phones) --- */
+  .card-grid{
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+
+  /* --- Page layout --- */
+  .page-wrapper{
+    width: 92%;
+    padding-inline: 12px;
+  }
+
+  /* --- Photos inside service page --- */
+  .service-photo-thumb{
+    width: 120px;
+  }
+
+  /* --- Breadcrumb no-wrap fix --- */
+  .breadcrumb {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small phones (<350px) — ONLY ONE CARD */
+@media (max-width: 350px){
+  .card-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  #service-search{
+    font-size: 0.95rem;
+    padding: 8px 10px;
+    width: calc(100% - 80px);
+  }
+
+  #search-btn{
+    width: 70px;
+  }
+
+  .logo-circle{
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+/* Prevent breadcrumb from breaking into 2 lines */
+.breadcrumb {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   SMOOTH ANIMATION PACK — ADDED
+========================================================= */
+
+/* Smooth card hover */
+.card{
+  transition:
+    transform .28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow .28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card:hover{
+  cursor: pointer;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* Smooth photo hover */
+.service-photo-thumb{
+  transition:
+    transform .28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow .28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.service-photo-thumb:hover{
+  cursor:pointer;
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Info box hover */
+.info-box{
+  cursor:default;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+/* Breadcrumb link */
+.breadcrumb a{
+  transition: color .25s ease, transform .20s ease;
+}
+
+.breadcrumb a:hover{
+  transform: scale(1.03);
+  color: var(--accent-dark);
+}
+
+
+h1, h2, h3, h4, h5, h6, p, footer {
+    cursor: default;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix homepage cards not reacting to tap */
+.homepage .card {
+    position: relative;
+    z-index: 5;          /* brings card to front */
+    pointer-events: auto;
+}
+
+
+/* ==============================================
+   DARK MODE — AMOLED
+================================================= */
+html.dark-mode {
+  --bg: #000000;
+  --card-bg: #111111;
+  --text: #eaeaea;
+  --muted: #a5a5a5;
+  --soft-border: #2b2b2b;
+  --accent: #6fe1d3;
+  --accent-dark: #56b0a6;
+
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* HEADER */
+html.dark-mode .site-header {
+  background: rgba(0,0,0,0.55) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+html.dark-mode .site-title {
+  color: #ffffff !important;
+}
+html.dark-mode .logo-circle {
+  background: #161616 !important;
+  color: #e6e6e6 !important;
+}
+
+/* CARDS */
+html.dark-mode .card {
+  background: #111111 !important;
+  border: 1px solid #1c1c1c !important;
+  color: #e8e8e8 !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.75) !important;
+}
+html.dark-mode .card-title { color: #f8f8f8 !important; }
+html.dark-mode .card-desc  { color: #b4b4b4 !important; }
+html.dark-mode .card-icon  {
+  background: #171717 !important;
+  color: #dcdcdc !important;
+}
+
+/* SEARCH */
+html.dark-mode #service-search {
+  background: #0f0f0f !important;
+  border-color: #333 !important;
+  color: #eaeaea !important;
+}
+html.dark-mode #service-search::placeholder {
+  color: #888 !important;
+}
+
+/* SEARCH BUTTON */
+html.dark-mode #search-btn {
+  background: var(--accent) !important;
+  color: black !important;
+}
+
+/* DROPDOWN */
+html.dark-mode #suggestions {
+  background: #0f0f0f !important;
+  border-color: #333 !important;
+}
+html.dark-mode #suggestions li:hover {
+  background: #1b1b1b !important;
+}
+
+/* FOOTER */
+html.dark-mode footer {
+  background: #0d0d0d !important;
+  color: #9c9c9c !important;
+}
+
+/* PILLS */
+html.dark-mode .pill {
+  background: #1a1a1a !important;
+  border: 1px solid #303030 !important;
+  color: #dcdcdc !important;
+}
+
+/* Online */
+html.dark-mode .pill--online {
+  background: #0d2622 !important;
+  border-color: #17796b !important;
+  color: #8fffe7 !important;
+}
+
+/* Offline */
+html.dark-mode .pill--offline {
+  background: #2b1f0c !important;
+  border-color: #7d5a21 !important;
+  color: #ffdfb5 !important;
+}
+
+/* Time */
+html.dark-mode .pill--time {
+  background: #121a26 !important;
+  border-color: #28406b !important;
+  color: #a7c7ff !important;
+}
+
+/* Validity */
+html.dark-mode .pill--validity {
+  background: #1b152d !important;
+  border-color: #46377a !important;
+  color: #d6c4ff !important;
+}
+
+html.dark-mode .top-banner {
+  background: linear-gradient(135deg, #111111, #0b0b0b) !important;
+  border: 1px solid #1f1f1f !important;
+}
+
+html.dark-mode .top-banner h1 {
+  color: #f1f1f1 !important;
+}
+
+html.dark-mode .top-banner p {
+  color: #bdbdbd !important;
+}
