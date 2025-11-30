@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ office.office_name }} – Kerala Services</title>
+
+  <link rel="stylesheet" href="{% static 'services/universal.css' %}">
+  <script defer src="{% static 'services/homepage.js' %}"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="logo-circle">KS</div>
+      <div class="site-title">Kerala Services</div>
+    </div>
+
+    <div class="header-search">
+      <div class="search-wrapper">
+        <input id="service-search" type="search"
+               placeholder="Search for services or offices…" autocomplete="off">
+        <button id="search-btn" type="button">Search</button>
+        <ul id="suggestions"></ul>
+      </div>
+     <button id="theme-toggle" class="theme-btn">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main class="page-wrapper">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="{% url 'home' %}">Home</a> ›
+    <span>{{ office.office_name }}</span>
+  </div>
+
+  <!-- Top banner: NAME only, no description -->
+  <div class="top-banner">
+    <h1>{{ office.office_name }}</h1>
+  </div>
+
+  <!-- About section (single place for description) -->
+  <div class="info-box">
+    <h2>About this Office</h2>
+    <p>{{ office.description|default:"Details for this office are not available." }}</p>
+  </div>
+
+  <!-- Services provided -->
+  <h2 class="section-title">Services Provided</h2>
+
+  {% if office.services.exists %}
+    <div class="card-grid">
+      {% for svc in office.services.all %}
+        <a href="{% url 'service_detail' svc.id %}" class="card">
+          <div class="card-icon">📘</div>
+          <div class="card-title">{{ svc.title }}</div>
+          <div class="card-desc">{{ svc.description|truncatewords:18 }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="info-box">No services available for this office.</div>
+  {% endif %}
+
+</main>
+
+<footer>
+  © 2025 Community Service Hub – Kerala
+</footer>
+
+</body>
+</html>

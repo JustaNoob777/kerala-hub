@@ -1,0 +1,112 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ service.title }} – Kerala Services</title>
+
+  <link rel="stylesheet" href="{% static 'services/universal.css' %}">
+  <script defer src="{% static 'services/homepage.js' %}"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="logo-circle">KS</div>
+      <div class="site-title">Kerala Services</div>
+    </div>
+
+    <div class="header-search">
+      <div class="search-wrapper">
+        <input id="service-search" type="search" placeholder="Search for services or offices…" autocomplete="off">
+        <button id="search-btn" type="button">Search</button>
+        <ul id="suggestions"></ul>
+      </div>
+     <button id="theme-toggle" class="theme-btn">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main class="page-wrapper">
+
+  <div class="breadcrumb">
+    <a href="{% url 'home' %}">Home</a> ›
+    <a href="{% url 'office_detail' service.office.id %}">{{ service.office.office_name }}</a> ›
+    <span>{{ service.title }}</span>
+  </div>
+
+  <div class="top-banner">
+    <h1>{{ service.title }}</h1>
+    <p>{{ service.office.office_name }}</p>
+  </div>
+
+  <div class="info-box">
+    <h2>About this service</h2>
+    <p>{{ service.description|default:"No description available." }}</p>
+    
+<div class="pill-container">
+  <div class="pill pill--offline/online" role="status" aria-label="Application method: Online and Offline">
+    <span class="pill-icon">🌐</span>
+    Online & Offline
+  </div>
+
+  <div class="pill pill--time" role="status" aria-label="Processing time">
+    <span class="pill-icon">⏱</span>
+    7–10 working days
+  </div>
+
+  <div class="pill pill--validity" role="status" aria-label="Validity">
+    <span class="pill-icon">📅</span>
+    Valid 1 year
+  </div>
+</div>
+  </div>
+
+  {% if documents %}
+  <h2 class="section-title">Required Documents</h2>
+  <div class="info-box">
+    {% for d in documents %}
+      <div class="document-item">📄 {{ d }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  
+{% if photos %}
+ <h2 class="section-title">Sample Forms & Images</h2>  
+ <div class="photo-grid">  
+ {% for p in photos %}  
+ <img src="{{ p.photo_url }}" class="service-photo-thumb" onclick="openPhotoModal('{{ p.photo_url }}')">  
+ {% endfor %}  
+ </div>
+{% endif %}
+</main>
+
+<!-- photo modal -->
+<div id="photo-modal" onclick="closePhotoModal()">  
+ <img id="modal-img" alt="Preview">  
+</div>
+
+<script>
+function openPhotoModal(url){
+  const modal = document.getElementById('photo-modal');
+  const img = document.getElementById('modal-img');
+  img.src = url;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closePhotoModal(){
+  const modal = document.getElementById('photo-modal');
+  modal.style.display = 'none';
+  document.getElementById('modal-img').src = '';
+  document.body.style.overflow = '';
+}
+</script>
+
+<footer>
+  © 2025 Community Service Hub – Kerala
+</footer>
+
+</body>
+</html>

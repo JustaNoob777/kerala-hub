@@ -1,0 +1,30 @@
+/* =========================================================
+   HOMEPAGE ONLY STYLES
+   (Universal CSS handles most layout & responsiveness)
+========================================================= */
+
+/* Ensure the dropdown aligns under search bar */
+.header-search {
+    position: relative;
+}
+
+/* Override dropdown width so it exactly matches the input */
+.search-wrapper #suggestions {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    max-width: none; /* Let it fully match input width */
+}
+
+/* Homepage section titles */
+.home-title {
+    margin-top: 45px;
+    margin-bottom: 12px;
+    cursor: default;
+}
+
+/* Extra bottom spacing between grids */
+.card-grid {
+    margin-bottom: 32px;
+}

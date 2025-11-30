@@ -1,0 +1,80 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerala Community Service Hub</title>
+  
+<link rel="stylesheet" href="{% static 'services/universal.css' %}">
+<link rel="stylesheet" href="{% static 'services/homepage.css' %}">
+<script defer src="{% static 'services/homepage.js' %}"></script>
+
+</head>
+
+<body class="homepage">
+  
+<header class="site-header">
+  <div class="header-inner">
+
+    <!-- Left: Logo + Title -->
+    <div class="header-left">
+      <div class="logo-circle">KS</div>
+      <div class="site-title">Kerala Services</div>
+    </div>
+
+    <!-- Right: Search + Theme Toggle -->
+    <div class="header-right">
+
+      <div class="search-wrapper">
+        <input id="service-search" type="search"
+               placeholder="Search Services & Offices…" autocomplete="off">
+        <button id="search-btn" type="button">Search</button>
+        <ul id="suggestions"></ul>
+      </div>
+
+      <!-- THEME BUTTON (correct place) -->
+      <button id="theme-toggle" class="theme-btn">🌙</button>
+
+    </div>
+
+  </div>
+</header>
+
+<main class="page-wrapper">
+
+  <div class="top-banner">
+    <h1>Kerala Community Service Hub</h1>
+    <p>Find offices, services and required documents quickly and easily.</p>
+  </div>
+
+  <h2 class="home-title">Popular Services</h2>
+  <div class="card-grid">
+    {% for service in services %}
+    <a href="{% url 'service_detail' service.id %}" class="card">
+      <div class="card-icon">📘</div>
+      <div class="card-title">{{ service.title }}</div>
+      <div class="card-desc">{{ service.description|default:"No description." }}</div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <h2 class="home-title">Available Offices</h2>
+  <div class="card-grid">
+    {% for office in offices %}
+    <a href="{% url 'office_detail' office.id %}" class="card">
+      <div class="card-icon">🏢</div>
+      <div class="card-title">{{ office.office_name }}</div>
+      <div class="card-desc">{{ office.description|default:"Office details" }}</div>
+    </a>
+    {% endfor %}
+  </div>
+
+</main>
+
+<footer>
+  © 2025 Community Service Hub – Kerala
+</footer>
+
+</body>
+</html>
