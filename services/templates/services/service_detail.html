@@ -18,7 +18,7 @@
       <div class="site-title">Kerala Services</div>
     </div>
 
-    <div class="header-search">
+    <div class="header-right">
       <div class="search-wrapper">
         <input id="service-search" type="search" placeholder="Search for services or offices…" autocomplete="off">
         <button id="search-btn" type="button">Search</button>
@@ -47,19 +47,34 @@
     <p>{{ service.description|default:"No description available." }}</p>
     
 <div class="pill-container">
-  <div class="pill pill--offline/online" role="status" aria-label="Application method: Online and Offline">
-    <span class="pill-icon">🌐</span>
-    Online & Offline
+  <!-- Application Method -->
+  <div class="pill pill--offline/online" role="status">
+    <span class="pill-icon">
+      {% if service.service_type == "Online" %}
+        🌐
+      {% elif service.service_type == "Offline" %}
+        🏢
+      {% else %}
+        🔄
+      {% endif %}
+    </span>
+    {{ service.service_type|default:"Method not specified" }}
   </div>
-
-  <div class="pill pill--time" role="status" aria-label="Processing time">
+  <!-- Processing Time -->
+  <div class="pill pill--time" role="status">
     <span class="pill-icon">⏱</span>
-    7–10 working days
+    {{ service.processing_time|default:"Processing time not specified" }}
   </div>
-
-  <div class="pill pill--validity" role="status" aria-label="Validity">
-    <span class="pill-icon">📅</span>
-    Valid 1 year
+  <!-- Validity -->
+  <div class="pill pill--validity" role="status">
+    <span class="pill-icon">
+      {% if service.validity %}
+        📅
+      {% else %}
+        ❓
+      {% endif %}
+    </span>
+    {{ service.validity|default:"Validity not specified" }}
   </div>
 </div>
   </div>
