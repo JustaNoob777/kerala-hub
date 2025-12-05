@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Service, Office, Document, ServiceDocument, ServicePhoto
 
+
 class ServiceDocumentInline(admin.TabularInline):
     model = ServiceDocument
     extra = 1

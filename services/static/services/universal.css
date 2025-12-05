@@ -450,7 +450,6 @@ body{
   border-radius: 12px;
 }
 
-
 /* Theme toggle button */
 .theme-btn {
     background: transparent;
@@ -808,4 +807,35 @@ html.dark-mode .top-banner h1 {
 
 html.dark-mode .top-banner p {
   color: #bdbdbd !important;
+}
+
+
+
+/* Slightly darker cream / sandal button */
+.save-btn-cream {
+  display: inline-block;
+  padding: 7px 14px;
+
+  background: linear-gradient(180deg, #f7ecd9, #f1e2c8); /* darker, warm cream */
+  border: 1px solid rgba(170, 135, 90, 0.35);            /* deeper sand border */
+  color: #4a3f2e;                                        /* warm dark brown text */
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+
+  transition: 0.2s ease;
+}
+
+.save-btn-cream:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(150, 110, 70, 0.18);
+}
+
+.save-btn-cream:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(150, 110, 70, 0.12);
 }

@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # -----------------------------------
 # Office Model
@@ -55,6 +57,7 @@ class Service(models.Model):
     )
     processing_time = models.CharField(max_length=100, null=True, blank=True)
     validity = models.CharField(max_length=100, null=True, blank=True)
+
     documents = models.ManyToManyField(
         Document,
         through='ServiceDocument',
@@ -96,3 +99,19 @@ class ServicePhoto(models.Model):
 
     def __str__(self):
         return f"Photo for {self.service.title}"
+
+
+# -----------------------------------
+# Saved Services (For Logged-in Users)
+# -----------------------------------
+class SavedService(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "saved_services"
+        unique_together = ("user", "service")
+
+    def __str__(self):
+        return f"{self.user.username} saved {self.service.title}"

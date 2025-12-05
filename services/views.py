@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from django.db.models import Q
-from .models import Service, Office, ServiceDocument, ServicePhoto
+from django.contrib.auth.decorators import login_required
 
+from .models import Service, Office, ServicePhoto, SavedService
 
 # =============================
 # HOME PAGE
@@ -10,6 +10,7 @@ from .models import Service, Office, ServiceDocument, ServicePhoto
 def home(request):
     services = Service.objects.filter(is_popular=True)[:6]
     offices = Office.objects.all()
+
     return render(request, "services/index.html", {
         "services": services,
         "offices": offices,
@@ -22,21 +23,22 @@ def home(request):
 def service_detail(request, id):
     service = get_object_or_404(Service, id=id)
 
-    # Documents (supports old + new M2M setup)
-    try:
-        documents = service.documents.all()
-    except Exception:
-        documents = [
-            sd.document.name if hasattr(sd, "document") else sd.document_name
-            for sd in service.servicedocument_set.all()
-        ]
+    # Documents (ManyToMany)
+    documents = service.documents.all()
 
+    # Photos
     photos = ServicePhoto.objects.filter(service=service)
+
+    # Check if user has saved this service
+    is_saved = False
+    if request.user.is_authenticated:
+        is_saved = SavedService.objects.filter(user=request.user, service=service).exists()
 
     return render(request, "services/service_detail.html", {
         "service": service,
         "documents": documents,
         "photos": photos,
+        "is_saved": is_saved,
     })
 
 
@@ -52,8 +54,9 @@ def office_detail(request, id):
         "services": services,
     })
 
+
 # =============================
-# SEARCH ENDPOINT (USED BY HOMEPAGE JS)
+# SEARCH ENDPOINT
 # =============================
 def search(request):
     q = request.GET.get("q", "").strip().lower()
@@ -62,26 +65,18 @@ def search(request):
     if not q:
         return JsonResponse(results, safe=False)
 
-    # --- SEARCH SERVICES (TITLE ONLY) ---
-    services = Service.objects.all()
-
-    for s in services:
-        title = s.title.lower()
-
-        if q in title:
+    # Services Search
+    for s in Service.objects.all():
+        if q in s.title.lower():
             results.append({
                 "type": "service",
                 "id": s.id,
                 "name": s.title,
             })
 
-    # --- SEARCH OFFICES (NAME ONLY) ---
-    offices = Office.objects.all()
-
-    for o in offices:
-        name = o.office_name.lower()
-
-        if q in name:
+    # Offices Search
+    for o in Office.objects.all():
+        if q in o.office_name.lower():
             results.append({
                 "type": "office",
                 "id": o.id,
@@ -89,3 +84,28 @@ def search(request):
             })
 
     return JsonResponse(results, safe=False)
+
+
+# =============================
+# SAVE / UNSAVE SERVICE AJAX
+# =============================
+@login_required
+def save_service(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    saved, created = SavedService.objects.get_or_create(user=request.user, service=service)
+    status = "saved" if created else "already_saved"
+    return JsonResponse({"status": status})
+
+
+@login_required
+def unsave_service(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    deleted, _ = SavedService.objects.filter(user=request.user, service=service).delete()
+    status = "removed" if deleted else "not_saved"
+    return JsonResponse({"status": status})
+    
+
+from django.shortcuts import render
+
+def google_login_only(request):
+    return render(request, "services/login_google_only.html")
